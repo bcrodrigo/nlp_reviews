@@ -27,7 +27,11 @@ The data dictionary is as follows:
 
 Follow the notebook located on the following directory.
 
-The main finding is with regards to the class balances of the Score.
+The main finding is with regards to the class balances of the review Score:
+
+< insert graph here >
+
+As seen in the graph above, the score of 5 is by far the most popular, compared to the other scores.
 
 TO DO: 
 
@@ -36,7 +40,6 @@ TO DO:
 
 ## Modelling
 
-
 ### Sentiment Analysis
 
 In this section I want to try different approaches to perform a sentiment analysis on the reviews:
@@ -44,3 +47,7 @@ In this section I want to try different approaches to perform a sentiment analys
 - Bag of words model with Count Vectorizer
 - TFID
 - Other pretrained models
+
+As noted in the EDA, there is a class imbalance, so we'll have to address it by:
+1. Mapping the score from 1-5 to 0-2 (bad, neutral, good)
+2. Downsampling the category with the highest review
