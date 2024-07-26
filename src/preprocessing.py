@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def preprocess_dataset(csv_filename, rebalance=True):
     """
     Function to preprocess a reviews datascet in csv into a dataframe with score and text.
@@ -47,7 +48,6 @@ def preprocess_dataset(csv_filename, rebalance=True):
         score_count = df_orig["Score"].value_counts()
         num_records = min(score_count.values)
 
-
         for k in range(3):
 
             # sample `num_records` with given score
@@ -59,8 +59,7 @@ def preprocess_dataset(csv_filename, rebalance=True):
 
             df_rebalanced = pd.concat([df_rebalanced, tempdf], axis=0)
 
-
-        # Note that we did not change the index of the new df. 
+        # Note that we did not change the index of the new df.
         # We'll filter the records in df_orig by those who don't have the same index as `df_rebalanced`
 
         df_orig = df_orig[~df_orig.index.isin(df_rebalanced.index)]
