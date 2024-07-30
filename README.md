@@ -46,3 +46,7 @@ In this section I want to try different approaches to perform a sentiment analys
 As noted in the EDA, there is a class imbalance, so we'll have to address it by:
 1. Mapping the score from 1-5 to 0-2 (bad, neutral, good)
 2. Downsampling the category with the highest review
+
+### NLP Tasks
+
+We'll use the [spaCy](https://spacy.io/) library to perform NLP tasks, such as tokenization, lemmatization, etc.
