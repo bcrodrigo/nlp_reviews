@@ -1,0 +1,17 @@
+# Ongoing requirements file
+python=3.11
+pandas
+matplotlib
+# For NLP tasks
+spacy
+# for formatting of Python scripts
+black
+#
+#   ------ NOTE ---------
+#
+# after installing all the libraries above
+# run the following in the terminal
+#
+#       python -m spacy download en_core_web_sm
+#
+#
