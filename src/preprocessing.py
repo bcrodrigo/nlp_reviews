@@ -3,7 +3,10 @@ import pandas as pd
 
 def preprocess_dataset(csv_filename, rebalance=True):
     """
-    Function to preprocess a reviews datascet in csv into a dataframe with score and text.
+    Function to preprocess a reviews datascet in csv into a dataframe with score and text. It performs the following steps:
+        1. Drop duplicate rows
+        2. Map score from 1-5 to 0-2
+        3. Rebalance the dataframe based on the scores
 
     Parameters
     ----------
@@ -29,15 +32,25 @@ def preprocess_dataset(csv_filename, rebalance=True):
         Note that in either case pd.concat([df_orig,df_rebalanced]) equals to all the records in the original dataset.
     """
 
+    # Read dataframe, only two colums
+
+    df_orig = pd.read_csv(csv_filename, compression='gzip',
+        usecols=['Text','Score'])
+
+    # Drop the duplicate rows based on reviews
+    df_orig = df_orig.drop_duplicates(subset = ['Text'])
+    
+    # Map score from 0 to 3
+
     # This mapping will convert the original scores as follows
     # 1,2 -> 0 (negative review)
     # 3 -> 1 (neutral review)
     # 4,5 -> (positive review)
     mapping = {1: 0, 2: 0, 3: 1, 4: 2, 5: 2}
 
-    df = pd.read_csv(csv_filename, compression="gzip")
+    # df = pd.read_csv(csv_filename, compression="gzip")
 
-    df_orig = df[["Text", "Score"]].copy()
+    # df_orig = df[["Text", "Score"]].copy()
     df_orig["Score"] = df_orig["Score"].map(mapping).values
 
     # Empty accumulator-like dataframe
@@ -65,3 +78,26 @@ def preprocess_dataset(csv_filename, rebalance=True):
         df_orig = df_orig[~df_orig.index.isin(df_rebalanced.index)]
 
     return df_orig, df_rebalanced
+
+def dataset_text_cleanup(df):
+    """
+    PLACEHOLDER
+    
+    To perform text cleanup for a preprocessed dataframe
+    It assumes it has two columns 'Text'  and 'Score'
+    The cleanup steps are as follows:
+    1. Remove HTML tags
+    2. Remove URLs
+    3. Remove excessive white space
+    
+    Parameters
+    ----------
+    df : TYPE
+        Description
+    
+    Returns
+    -------
+    TYPE
+        Description
+    """
+    return True
