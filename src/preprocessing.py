@@ -34,12 +34,11 @@ def preprocess_dataset(csv_filename, rebalance=True):
 
     # Read dataframe, only two colums
 
-    df_orig = pd.read_csv(csv_filename, compression='gzip',
-        usecols=['Text','Score'])
+    df_orig = pd.read_csv(csv_filename, compression="gzip", usecols=["Text", "Score"])
 
     # Drop the duplicate rows based on reviews
-    df_orig = df_orig.drop_duplicates(subset = ['Text'])
-    
+    df_orig = df_orig.drop_duplicates(subset=["Text"])
+
     # Map score from 0 to 3
 
     # This mapping will convert the original scores as follows
@@ -79,22 +78,23 @@ def preprocess_dataset(csv_filename, rebalance=True):
 
     return df_orig, df_rebalanced
 
+
 def dataset_text_cleanup(df):
     """
     PLACEHOLDER
-    
+
     To perform text cleanup for a preprocessed dataframe
     It assumes it has two columns 'Text'  and 'Score'
     The cleanup steps are as follows:
     1. Remove HTML tags
     2. Remove URLs
     3. Remove excessive white space
-    
+
     Parameters
     ----------
     df : TYPE
         Description
-    
+
     Returns
     -------
     TYPE
