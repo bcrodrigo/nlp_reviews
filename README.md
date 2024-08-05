@@ -29,7 +29,7 @@ The data dictionary is as follows:
 ## EDA
 
 Follow the notebook located on the [jupyter_notebooks](https://github.com/bcrodrigo/nlp_reviews/tree/main/jupyter_notebooks) directory. The main finding is with regards to the class balances of the review Score:
-![[nlp_reviews/images/review_score_dist.png]]
+![[images/review_score_dist.png]]
 As seen in the graph above, the score of 5 is by far the most popular, compared to the other scores.
 
 ## Modelling
