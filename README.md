@@ -30,7 +30,34 @@ The data dictionary is as follows:
 
 Follow the notebook located on the [jupyter_notebooks](https://github.com/bcrodrigo/nlp_reviews/tree/main/jupyter_notebooks) directory. The main finding is with regards to the class balances of the review Score:
 ![score_dist](images/review_score_dist.png)
+
+
 As seen in the graph above, the score of 5 is by far the most popular, compared to the other scores.
+
+## Preprocessing Pipeline
+
+**1. Balancing Data**
+
+As noted in the EDA, there is a class imbalance in the Score of the reviews, so we'll address it by:
+- Mapping the score from 1-5 to 0-2 (bad, neutral, and good respectively)
+- Remove duplicate reviews
+- Downsampling the category with the highest review
+
+ **2. Text Cleaning**
+
+In this step we'll remove text that doesn't convey any meaningful information such as
+- HTML tags
+- URLs
+- Excessive whitespace
+
+Note that at this point we're not removing any punctuation, numbers, or special symbols. I want to leave the text human-readable prior to the tokenization step.
+
+**3. Tokenization**
+
+We'll use the [spaCy](https://spacy.io/) library to perform: 
+- tokenization
+- stop word and punctuation removal
+- lemmatization
 
 ## Modelling
 
@@ -43,10 +70,3 @@ In this section I want to try different approaches to perform a sentiment analys
 - LSTM
 - Other pre-trained models
 
-As noted in the EDA, there is a class imbalance, so we'll have to address it by:
-1. Mapping the score from 1-5 to 0-2 (bad, neutral, good)
-2. Downsampling the category with the highest review
-
-### NLP Tasks
-
-We'll use the [spaCy](https://spacy.io/) library to perform NLP tasks, such as tokenization, lemmatization, etc.
