@@ -1,4 +1,5 @@
 import pandas as pd
+from bs4 import BeautifulSoup
 
 
 def preprocess_dataset(csv_filename, rebalance=True):
@@ -79,12 +80,26 @@ def preprocess_dataset(csv_filename, rebalance=True):
     return df_orig, df_rebalanced
 
 
-def dataset_text_cleanup(df):
-    """
-    PLACEHOLDER
+def remove_html_tags(text):
+    """To remove html tags from a string of text
 
-    To perform text cleanup for a preprocessed dataframe
-    It assumes it has two columns 'Text'  and 'Score'
+    Parameters
+    ----------
+    text : str
+        Text containing html tags
+
+    Returns
+    -------
+    str
+        Text without the html tags
+    """
+    soup = BeautifulSoup(text, "html.parser")
+    return soup.get_text()
+
+
+def dataset_text_cleanup(df):
+    """To perform text cleanup for a dataframe with two columns 'Text'  and 'Score'. This step is to be performed prior to tokenization.
+
     The cleanup steps are as follows:
     1. Remove HTML tags
     2. Remove URLs
@@ -92,12 +107,25 @@ def dataset_text_cleanup(df):
 
     Parameters
     ----------
-    df : TYPE
-        Description
+    df : DataFrame
+        Pandas dataframe with 'Text' and 'Score' columns
 
     Returns
     -------
-    TYPE
-        Description
+    DataFrame
+        Pandas dataframe with cleaned text as defined above
     """
-    return True
+
+    # Remove HTML
+    df["Text"] = df["Text"].apply(remove_html_tags)
+
+    # Remove URLs
+    df["Text"] = df["Text"].str.replace(r"https?://\S+|www\.\S+", "", regex=True)
+
+    # Remove excessive white space at beginning and end of string
+    df["Text"] = df["Text"].str.strip()
+
+    # Normalize whitespace
+    df["Text"] = df["Text"].str.replace(r"\s+", " ", regex=True)
+
+    return df
