@@ -1,5 +1,8 @@
 import spacy
 
+# this acts as a global variable for the tokenizer
+nlp = spacy.load("en_core_web_sm")
+
 
 def tokenizer_and_lemma(sentence):
     """
@@ -21,7 +24,7 @@ def tokenizer_and_lemma(sentence):
     List
         A list of lemmatized tokens
     """
-    nlp = spacy.load("en_core_web_sm")
+
     document = nlp(sentence)
 
     token_list = [
