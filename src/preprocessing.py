@@ -129,3 +129,39 @@ def dataset_text_cleanup(df):
     df["Text"] = df["Text"].str.replace(r"\s+", " ", regex=True)
 
     return df
+
+
+def downsample_dataframe(df, fraction):
+    """Function to extract a fraction of a cleaned dataframe while keeping the same proportion of scores.
+
+    Parameters
+    ----------
+    df : DataFrame
+        Pandas dataframe with 'Text' and 'Score' columns
+    fraction : float
+        Number representing the fraction of records to be extracted
+
+    Returns
+    -------
+    DataFrame
+        Pandas dataframe with less rows as defined above
+    """
+    assert (fraction > 0.0) & (
+        fraction <= 1.0
+    ), "The fraction should be a positive number between 0.0 and 1.0"
+
+    # Empty df to us as an accumulator
+    df_acc = pd.DataFrame()
+
+    avail_score = dfnew["Score"].value_counts().index
+
+    for score in avail_score:
+        tempdf = (
+            dfnew.query(f"Score == {score}")
+            .sample(frac=fraction, random_state=10)
+            .copy()
+        )
+
+        df_acc = pd.concat([df_acc, tempdf], axis=0)
+
+    return df_acc
