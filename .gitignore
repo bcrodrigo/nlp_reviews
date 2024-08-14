@@ -8,3 +8,4 @@ data/
 # files in the src/ folder
 src/.ipynb_checkpoints/
 src/__pycache__/
+src/code_testing/
