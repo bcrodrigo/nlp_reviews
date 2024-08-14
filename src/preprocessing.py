@@ -153,11 +153,11 @@ def downsample_dataframe(df, fraction):
     # Empty df to us as an accumulator
     df_acc = pd.DataFrame()
 
-    avail_score = dfnew["Score"].value_counts().index
+    avail_score = df["Score"].value_counts().index
 
     for score in avail_score:
         tempdf = (
-            dfnew.query(f"Score == {score}")
+            df.query(f"Score == {score}")
             .sample(frac=fraction, random_state=10)
             .copy()
         )
