@@ -1,6 +1,8 @@
 ## Background
 
-Repository to do NLP tasks, namely the following:
+Natural language processing (NLP) is a subfield of computer science and artificial intelligence that uses machine learning to enable computers to understand and communicate with human language[^1].
+
+In this repository, we'll implement the following NLP tasks:
 
 - Sentiment Analysis
 - Entity Extraction
@@ -63,10 +65,18 @@ We'll use the [spaCy](https://spacy.io/) library to perform:
 
 ### Sentiment Analysis
 
-In this section I want to try different approaches to perform a sentiment analysis on the reviews:
+In this section I want to try different approaches to perform a sentiment analysis (predict if the text conveys positive, neutral, or negative sentiment) on the reviews. We'll implement and compare the following models.
 
 - Bag of words model with Count Vectorizer
 - TFID
 - LSTM
 - Other pre-trained models
 
+## Work In Progress
+- [ ] Finalize selecting all the model evaluation metrics
+- [ ] Modelling with TFID
+- [ ] Modelling with Pre-trained models
+
+# References
+
+[^1]: https://www.ibm.com/topics/natural-language-processing
